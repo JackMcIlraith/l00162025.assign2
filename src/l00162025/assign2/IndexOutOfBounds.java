@@ -7,6 +7,6 @@ public class IndexOutOfBounds extends Exception {
     }
 
     public IndexOutOfBounds() {
-        System.out.println("Invalid input. please try again and reduce the search index");
+        System.out.println("Invalid input. please try again and reduce the index");
     }
 }

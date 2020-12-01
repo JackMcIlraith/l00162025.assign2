@@ -64,20 +64,10 @@ public class Main {
 		myTest.add("three");
 		myTest.add("four");
 		myTest.add("five");
-		myTest.printArray();
 		myTest.add("six");
 		myTest.printArray();
 		System.out.println("//////////////");
-		System.out.println(myTest.get(1));
-		System.out.println(myTest.get(2));
-		System.out.println(myTest.get(3));
-		System.out.println(myTest.get(4));
-		System.out.println(myTest.get(5));
-		System.out.println(myTest.get(6));
-		myTest.set(3,"Aaaarg");
-		System.out.println("XXXXXXXXXXXXXXXXX");
+		myTest.remove(7);
 		myTest.printArray();
-		System.out.println(myTest.contains("four"));
-
     }
 }

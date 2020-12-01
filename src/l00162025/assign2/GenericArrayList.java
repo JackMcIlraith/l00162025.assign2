@@ -14,18 +14,18 @@ public class GenericArrayList <T> implements IList{
         this.ourArray = (T[]) new Object[arrayCurrentMaxSize];
     }
 
-    public void printArray(){
+    public void printArray(){ //used to test
         System.out.println(ourArray[0]);
         GenericArrayListIterator iteratoror = new GenericArrayListIterator();
         while (iteratoror.hasNext()) {
-            System.out.println(iteratoror.next()); //will not return last
+            System.out.println(iteratoror.next());
         }
 
     }
 
     @Override
     public int size() {
-        return this.arrayCurrentMaxSize;
+        return this.currentFilled;
     }
 
     @Override
@@ -80,6 +80,7 @@ public class GenericArrayList <T> implements IList{
             }
             resizedArray[resizeCopyIndex] = iteratoror.current();
             ourArray = resizedArray;
+            arrayCurrentMaxSize = arrayCurrentMaxSize*2;
         }
     }
 
@@ -118,25 +119,6 @@ public class GenericArrayList <T> implements IList{
         return hold;
     }
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///ToDo
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    @Override
-    public void add(int index, Object element) throws IndexOutOfBounds {
-
-    }
-
-    @Override
-    public Object remove(int index) throws IndexOutOfBounds {
-        return null;
-    }
-
-    @Override
-    public boolean remove(Object elem) {
-        return false;
-    }
-
     @Override
     public boolean contains(Object element) {
         if(ourArray[0] == element){
@@ -150,6 +132,60 @@ public class GenericArrayList <T> implements IList{
         }
         return false;
     }
+
+    @Override
+    public void add(int index, Object element) throws IndexOutOfBounds {
+        if(index-1 > currentFilled ){
+            try {
+                throw new IndexOutOfBounds();
+            } catch (IndexOutOfBounds indexOutOfBounds) {
+                indexOutOfBounds.printStackTrace();
+            }
+        }
+        else {
+            resize();
+            currentFilled++;
+            int mover = currentFilled;
+            while(mover != index-1){
+                ourArray[mover]= ourArray[mover-1];
+                mover--;
+            }
+            ourArray[index-1] = element;
+        }
+
+    }
+
+    @Override
+    public Object remove(int index) throws IndexOutOfBounds {
+        if(index > currentFilled ){
+            try {
+                throw new IndexOutOfBounds();
+            } catch (IndexOutOfBounds indexOutOfBounds) {
+                indexOutOfBounds.printStackTrace();
+            }
+            return null;
+        }
+        Object holder = ourArray[index-1];
+        for(int i = index-1; i <currentFilled;i++){
+            ourArray[i] = ourArray[i+1];
+        }
+        currentFilled--;
+        return holder;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///ToDo
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+    @Override
+    public boolean remove(Object elem) {
+        return false;
+    }
+
 
 
 }
