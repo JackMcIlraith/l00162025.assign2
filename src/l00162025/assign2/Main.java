@@ -58,16 +58,20 @@ public class Main {
 
 		*/
 
-		GenericArrayList<String> myTest = new GenericArrayList<>();
+		GenericLinkList<String> myTest = new GenericLinkList();
 		myTest.add("one");
 		myTest.add("two");
 		myTest.add("three");
 		myTest.add("four");
 		myTest.add("five");
 		myTest.add("six");
-		myTest.printArray();
 		System.out.println("//////////////");
-		myTest.remove("one");
-		myTest.printArray();
+		myTest.get(1);
+		GenericStack<String> stackTest = new GenericStack<>();
+		stackTest.push("first in");
+		stackTest.push("second in");
+		System.out.println(stackTest.peek());
+
+
     }
 }

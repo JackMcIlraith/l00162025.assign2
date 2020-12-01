@@ -6,7 +6,7 @@ import java.util.function.Consumer;
 public class GenericArrayList <T> implements IList{
     private final int defaultSize = 5; //default arraylist size for this generic
     private int arrayCurrentMaxSize;
-    private Object[] ourArray = (Object[]) new Object[arrayCurrentMaxSize];
+    private Object[] ourArray;
     private int currentFilled = 0;
 
 //Constructor:
@@ -14,7 +14,6 @@ public class GenericArrayList <T> implements IList{
         this.arrayCurrentMaxSize = defaultSize;
         this.ourArray = (T[]) new Object[arrayCurrentMaxSize];
     }
-
 
 
 //Inserters, Adders and Setter:
@@ -79,7 +78,9 @@ public class GenericArrayList <T> implements IList{
         return ourArray[index-1]; // return index -1 to avoid off by 1 error
     }
 
+
 //Removers:
+
     @Override
     public boolean remove(Object elem) throws IndexOutOfBounds { //inefficient function, as if we use a index object from contains(element) we could remove with the remove(index) function very quickly
         if(!contains(elem)){ //ensure element is in arraylist
@@ -123,6 +124,7 @@ public class GenericArrayList <T> implements IList{
         currentFilled--; //decrease current array size *****VIP*****
         return holder;
     }
+
 
 //Helpers:
 
@@ -176,6 +178,7 @@ public class GenericArrayList <T> implements IList{
         return false;
     }
 
+
 //Iterators:
 
     @Override
@@ -216,11 +219,9 @@ public class GenericArrayList <T> implements IList{
         }
     }
 
-
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///ToDo - check that == works when evaluating Persons class, if needed change to equals()
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///ToDo - check that == works when evaluating Persons class, if needed change to equals(), however this is not required
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
