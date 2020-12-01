@@ -77,6 +77,7 @@ public class Main {
 		myTest.set(3,"Aaaarg");
 		System.out.println("XXXXXXXXXXXXXXXXX");
 		myTest.printArray();
+		System.out.println(myTest.contains("four"));
 
     }
 }

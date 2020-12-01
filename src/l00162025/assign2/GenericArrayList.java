@@ -119,8 +119,7 @@ public class GenericArrayList <T> implements IList{
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///ToDo - gittest
-    ///branch test
+    ///ToDo
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
@@ -140,6 +139,15 @@ public class GenericArrayList <T> implements IList{
 
     @Override
     public boolean contains(Object element) {
+        if(ourArray[0] == element){
+            return true;
+        }
+        GenericArrayListIterator iteratoror = new GenericArrayListIterator();
+        while (iteratoror.hasNext()) {
+            if(iteratoror.next() == element){
+                return true;
+            }
+        }
         return false;
     }
 
