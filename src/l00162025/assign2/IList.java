@@ -40,7 +40,7 @@ public interface IList <T> extends Iterable<T> {
      * @param elem the element to remove
      * @return whether the elements was removed or not
      */
-    public boolean remove(T elem);//throws an IndexOutOfBounds exception where appropriate
+    public boolean remove(T elem) throws IndexOutOfBounds;//throws an IndexOutOfBounds exception where appropriate
     /**
      * Returns true if this list contains no elements.
      * @return true if this list contains no elements

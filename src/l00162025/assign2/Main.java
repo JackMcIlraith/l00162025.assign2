@@ -67,7 +67,7 @@ public class Main {
 		myTest.add("six");
 		myTest.printArray();
 		System.out.println("//////////////");
-		myTest.remove(7);
+		myTest.remove("one");
 		myTest.printArray();
     }
 }
