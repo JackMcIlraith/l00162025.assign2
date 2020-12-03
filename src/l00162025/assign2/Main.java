@@ -1,6 +1,6 @@
 package l00162025.assign2;
 
-import java.util.LinkedList;
+import java.util.Scanner;
 
 public class Main {
 
@@ -56,7 +56,7 @@ public class Main {
 		TestList.remove(4);
 		TestList.printList();
 
-		*/
+
 
 		GenericLinkList<String> myTest = new GenericLinkList();
 		myTest.add("one");
@@ -71,6 +71,15 @@ public class Main {
 		stackTest.push("first in");
 		stackTest.push("second in");
 		System.out.println(stackTest.peek());
+        System.out.println(stackTest.pop());
+        System.out.println(stackTest.pop());
+
+
+*/
+
+
+		InfixTester test = new InfixTester();
+
 
 
     }
