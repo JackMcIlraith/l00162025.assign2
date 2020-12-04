@@ -60,5 +60,6 @@ public interface IList <T> extends Iterable<T> {
      */
     public Iterator<T> iterator();
 
+    void rotate(int distance) throws Throwable;
 
 }

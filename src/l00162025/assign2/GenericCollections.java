@@ -53,14 +53,14 @@ public class GenericCollections {
         if(distance == 0){
             return;
         }
-        else if(distance > 0){
+        else if(distance > 0){ //rotate left
             for(int i =0; i < distance; i++){
                 list.add(list.get(0));
                 list.remove(0);
             }
             return;
         }
-        else if (distance < 0){
+        else if (distance < 0){ //rotate right
             distance*=-1;
             for(int i =0; i < distance; i++) {
                 list.add(list.get(list.size() - 1));

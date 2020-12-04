@@ -1,5 +1,6 @@
 package l00162025.assign2;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.function.Consumer;
 
@@ -8,8 +9,9 @@ public class GenericArrayList <T> implements IList{
     private int arrayCurrentMaxSize;
     private Object[] ourArray;
     private int currentFilled = 0;
+    private Object IndexOutOfBoundsException;
 
-//Constructor:
+    //Constructor:
     public GenericArrayList() {
         this.arrayCurrentMaxSize = defaultSize;
         this.ourArray = (T[]) new Object[arrayCurrentMaxSize];
@@ -178,6 +180,35 @@ public class GenericArrayList <T> implements IList{
         return false;
     }
 
+    @Override
+    public void rotate(int distance) throws Throwable {
+        if (isEmpty()) {
+            throw (Throwable) IndexOutOfBoundsException;
+        }
+        distance = distance % ourArray.length;
+        if (distance == 0) {
+            return;
+        } else if (distance <= 0) { //rotate right
+            distance *= -1;
+            for (int i = 0; i < distance; i++) {
+                add(get(size() - 1));
+                for (int j = size() - 1; j > 0; j--) {
+                    set(j, get(j - 1));
+                }
+                set(0, get(size() - 1));
+                remove(size() - 1);
+            }
+            return;
+        } else if (distance >= 0) { //rotate left
+            for (int i = 0; i < distance; i++) {
+                add(0); //very inefficient in memory if the size has exactly matched the limit of the arraylist, but if not, then its about O(n) per iteration
+                remove(0);
+                return;
+            }
+
+        }
+    }
+
 
 //Iterators:
 
@@ -185,6 +216,8 @@ public class GenericArrayList <T> implements IList{
     public Iterator iterator() {
         return new GenericArrayListIterator();
     }
+
+
 
     class GenericArrayListIterator implements Iterator<T> {
 
@@ -227,6 +260,8 @@ public class GenericArrayList <T> implements IList{
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///ToDo - check that == works when evaluating Persons class, if needed change to equals(), however this is not required
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 
 

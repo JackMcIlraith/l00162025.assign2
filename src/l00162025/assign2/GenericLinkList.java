@@ -79,6 +79,11 @@ public class GenericLinkList <T> implements IList{
         return new GenericLinkListIterator();
     }
 
+    @Override
+    public void rotate(int distance) throws Throwable {
+
+    }
+
     class GenericLinkListIterator implements Iterator <Node>{
         private Node cursor;
         public GenericLinkListIterator() {

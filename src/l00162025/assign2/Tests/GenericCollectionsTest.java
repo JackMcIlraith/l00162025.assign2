@@ -22,7 +22,7 @@ public class GenericCollectionsTest {
         GenericCollections.rotate(myList, 2);
         GenericCollections.printList("\nList rotated left by two (as per Dermot's spec):", myList);
         GenericCollections.rotate(myList, -8);
-        GenericCollections.printList("\nList rotated right by two:", myList);
+        GenericCollections.printList("\nList rotated right by eight:", myList);
         System.out.println("\nThe oldest person is " + GenericCollections.max(myList));
     }
 }
