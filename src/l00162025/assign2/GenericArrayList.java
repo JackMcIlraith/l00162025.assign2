@@ -117,8 +117,8 @@ public class GenericArrayList <T> implements IList{
         }
         //begin to copy array to new location.
         //while System.arraycopy will do this, it was decided that learning to do it had its own better value
-        Object holder = ourArray[index-1]; // begin overriding elements starting fom index location on array
-        for(int i = index-1; i <currentFilled;i++){
+        Object holder = ourArray[index]; // begin overriding elements starting fom index location on array
+        for(int i = index; i <currentFilled;i++){
             ourArray[i] = ourArray[i+1];
         }
         currentFilled--; //decrease current array size *****VIP*****
