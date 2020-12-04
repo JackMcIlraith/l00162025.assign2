@@ -7,7 +7,7 @@ import l00162025.assign2.Person;
 
 public class GenericCollectionsTest {
 
-    public static void main(String[] args) throws IndexOutOfBounds {
+    public static void main(String[] args) throws Throwable {
         GenericArrayList<Person> myList = new GenericArrayList<>();
         myList.add(new Person(20, "Hegarty", "2Dermot"));
         myList.add(new Person(23,"Minchin", "3Tim"));
@@ -21,8 +21,8 @@ public class GenericCollectionsTest {
         GenericCollections.printList("\nSorted List based on natural ordering (age):", myList);
         GenericCollections.rotate(myList, 2);
         GenericCollections.printList("\nList rotated left by two (as per Dermot's spec):", myList);
-        GenericCollections.rotate(myList, -8);
-        GenericCollections.printList("\nList rotated right by eight:", myList);
+        GenericCollections.rotate2(myList, -2);
+        GenericCollections.printList("\nList rotated right IList rotate to correct:", myList);
         System.out.println("\nThe oldest person is " + GenericCollections.max(myList));
     }
 }
