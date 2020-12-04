@@ -7,6 +7,7 @@ import java.util.function.Consumer;
 public class GenericLinkList <T> implements IList{
     Node headNode;
     Node tailNode;
+    private Object IndexOutOfBoundsException;
 
     public void printList(){
         Node current = headNode;
@@ -48,6 +49,8 @@ public class GenericLinkList <T> implements IList{
              current = current.nextNode;
          }
          tailNode.nextNode = new Node(elem);
+         tailNode = tailNode.nextNode;
+         tailNode.nextNode = null;
      }
  }
 
@@ -81,7 +84,33 @@ public class GenericLinkList <T> implements IList{
 
     @Override
     public void rotate(int distance) throws Throwable {
+        if (isEmpty()) {
+            throw (Throwable) IndexOutOfBoundsException;
+        }
+        distance = distance % size();
 
+        if(distance == 0){
+            return;
+        }
+        else if (distance > 0){
+            for(int i = 0; i < distance; i++) {
+                tailNode.nextNode = headNode;
+                tailNode = tailNode.nextNode;
+                headNode = headNode.nextNode;
+                tailNode.nextNode = null;
+            }
+            return;
+        }
+        else if(distance < 0){
+            distance *=-1;
+            for(int i = 0; i < distance; i++ ){
+                tailNode.nextNode=headNode;
+                tailNode = tailNode.nextNode;
+                headNode = headNode.nextNode;
+                tailNode.nextNode = null;
+            }
+            return;
+        }
     }
 
     class GenericLinkListIterator implements Iterator <Node>{
@@ -181,6 +210,7 @@ public class GenericLinkList <T> implements IList{
         }
 
     }
+
     @Override
     public void add(int index, Object element) throws IndexOutOfBounds {
         Node newNode = new Node(element);
@@ -207,7 +237,6 @@ public class GenericLinkList <T> implements IList{
         }
     }
 
-
     @Override
     public Object remove(int index) throws IndexOutOfBounds {
         Node toRemove = new Node(get(index));
@@ -215,11 +244,11 @@ public class GenericLinkList <T> implements IList{
         if(index > size()){
             throw new IndexOutOfBounds();
         }
-        else if(index == 1){
+        else if(index == 0){
             headNode = headNode.nextNode;
             return toRemove;
         }
-        for(int i = 1; i < index-1; i++){
+        for(int i = 0; i < index; i++){
             current = current.nextNode;
         }
         current.nextNode = current.nextNode.nextNode;

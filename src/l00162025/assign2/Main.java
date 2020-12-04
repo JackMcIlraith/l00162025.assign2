@@ -6,14 +6,7 @@ public class Main {
 
 
 
-    public static void main(String[] args) throws IndexOutOfBounds {
-
-
-    	/*
-	LinkList testing
-
-
-
+    public static void main(String[] args) throws Throwable {
 
 	GenericLinkList<String> TestList = new GenericLinkList<>();
     //    System.out.println(TestList.isEmpty());
@@ -23,8 +16,17 @@ public class Main {
 		TestList.add("Third in");
 		TestList.add("The end?");
 		TestList.printList();
-       System.out.println(TestList.size());
-   //     System.out.println(TestList.isEmpty());
+        TestList.rotate(2);
+        System.out.println("/////////////////");
+        TestList.printList();
+		TestList.rotate(-2);
+		System.out.println("/////////////////");
+		TestList.printList();
+
+
+        //     System.out.println(TestList.isEmpty());
+
+        /*
 		GenericLinkList<String> TestList2 = new GenericLinkList<>();
 		TestList2.add(TestList.get(3));
 		System.out.println("Testing get function by new list having element 3 of old; expect 'third but 1' ");
@@ -78,7 +80,7 @@ public class Main {
 */
 
 
-		InfixTester test = new InfixTester();
+		//InfixTester test = new InfixTester();
 
 
 
