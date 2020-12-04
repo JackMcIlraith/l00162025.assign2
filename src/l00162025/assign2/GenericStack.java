@@ -15,12 +15,16 @@ public class GenericStack<T> implements IStack {
 
     @Override
     public Object pop() throws IndexOutOfBounds {
-        try{ //clever little try/finally statement to return the last element of the linked list, then delete the last element without having to place the element in a holder variable
-            return stackData.get(stackData.size()); //return last in list (Last in- first out)
-        }
-        finally {
-            stackData.remove(stackData.get(stackData.size())); //delete last entry in the LinkedList
-        }
+        if(!stackData.isEmpty()) {
+            try { //clever little try/finally statement to return the last element of the linked list, then delete the last element without having to place the element in a holder variable
+
+                return stackData.get(stackData.size());
+            }//return last in list (Last in- first out)
+
+            finally {
+                stackData.remove(stackData.get(stackData.size())); //delete last entry in the LinkedList
+            }
+        } else return null;
     }
 
     @Override

@@ -15,12 +15,14 @@ public class GenericQueue<T> implements IQueue { //Works as a FIFO Queue
 
     @Override
     public Object dequeue() throws IndexOutOfBounds{
-        //Clever little workaround to avoid having to place element in a holding variable
-        try{
-            return queueData.get(1); //returns first element in Queue, as per fifo.
-        } finally {
-            queueData.remove(1); //deletes first element in queue after it is returned.
-        }
+        if(!queueData.isEmpty()) {
+            //Clever little workaround to avoid having to place element in a holding variable
+            try {
+                return queueData.get(1); //returns first element in Queue, as per fifo.
+            } finally {
+                queueData.remove(1); //deletes first element in queue after it is returned.
+            }
+        }else return null;
     }
 
     @Override

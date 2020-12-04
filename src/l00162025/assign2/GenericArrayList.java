@@ -57,8 +57,8 @@ public class GenericArrayList <T> implements IList{
             }
             return null;
         }
-        Object hold = ourArray[index-1]; //hold array element before deletion, as needed as return
-        ourArray[index-1] = element; // replace old element with new
+        Object hold = ourArray[index]; //hold array element before deletion, as needed as return
+        ourArray[index] = element; // replace old element with new
         return hold; //return old element
     }
 
@@ -75,7 +75,7 @@ public class GenericArrayList <T> implements IList{
             }
             return null;
         }
-        return ourArray[index-1]; // return index -1 to avoid off by 1 error
+        return ourArray[index];
     }
 
 
@@ -208,6 +208,11 @@ public class GenericArrayList <T> implements IList{
                 }
                 return null; //should throw exception IndexOutOfBounds before reaching here
             }
+        //    else if (cursor == 0){
+        //        cursor++;
+        //        return (T) ourArray[cursor-1];
+
+        //    }
             else{
                 cursor++; //iterate cursor
                 return (T) ourArray[cursor]; //return element, has to be type cast to ensure generic is handled.
