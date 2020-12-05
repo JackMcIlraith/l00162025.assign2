@@ -35,11 +35,11 @@ public class GenericStack<T> implements IStack {
         if(!stackData.isEmpty()) {
             try { //clever little try/finally statement to return the last element of the linked list, then delete the last element without having to place the element in a holder variable
 
-                return stackData.get(stackData.size());
+                return stackData.get(stackData.size()-1);
             }//return last in list (Last in- first out)
 
             finally {
-                stackData.remove(stackData.get(stackData.size())); //delete last entry in the LinkedList
+                stackData.remove((stackData.size()-1)); //delete last entry in the LinkedList
             }
         } else return null;
     }
@@ -52,7 +52,7 @@ public class GenericStack<T> implements IStack {
      */
     @Override
     public Object peek() throws IndexOutOfBounds {
-        return stackData.get(stackData.size()); // return the last node in the linked list
+        return stackData.get(stackData.size()-1); // return the last node in the linked list
     }
 
     /**
