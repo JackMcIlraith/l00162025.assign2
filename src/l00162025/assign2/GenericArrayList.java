@@ -4,6 +4,11 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.function.Consumer;
 
+/**
+ * Managed array with default size of 5, just to demonstrate all aspects of arraylist
+ * keeps track of the size using an internal tracker rather than dynamically finding its own size
+ * @param <T>
+ */
 public class GenericArrayList <T> implements IList{
     private final int defaultSize = 5; //default arraylist size for this generic
     private int arrayCurrentMaxSize;
@@ -11,7 +16,11 @@ public class GenericArrayList <T> implements IList{
     private int currentFilled = 0;
     private Object IndexOutOfBoundsException;
 
-    //Constructor:
+//Constructor:
+
+    /**
+     * default constructor
+     */
     public GenericArrayList() {
         this.arrayCurrentMaxSize = defaultSize;
         this.ourArray = (T[]) new Object[arrayCurrentMaxSize];
@@ -20,6 +29,11 @@ public class GenericArrayList <T> implements IList{
 
 //Inserters, Adders and Setter:
 
+    /**
+     * add element to the end of array,
+     * assess if the array needs to be expanded first
+     * @param elem
+     */
     @Override
     public void add(Object elem) { //add to end of array
         resize(); //check and make resize if required
@@ -27,6 +41,12 @@ public class GenericArrayList <T> implements IList{
         currentFilled++; //increment the size of array
     }
 
+    /**
+     * insert element into array at index, any other elements to the right will be moved 1, and array will be resized if required
+     * @param index index at which the specified element is to be inserted
+     * @param element element to be inserted
+     * @throws IndexOutOfBounds
+     */
     @Override
     public void add(int index, Object element) throws IndexOutOfBounds { //inserts element ino array at index location - make sure there is space left, and increase size of current capacity
         if(index-1 > currentFilled ){ //check and make sure we are not trying to insert into unmannaged section of array
@@ -37,18 +57,25 @@ public class GenericArrayList <T> implements IList{
             }
         }
         else {
-            resize(); //check if the array is at Capacity and resize if necessary
             currentFilled++; //increase the size of current array
+            resize(); //check if the array is at Capacity and resize if necessary
             int mover = currentFilled; // use an alternate helper cursor to ensure that the currentFilled value is not impacted by the function
-            while(mover != index-1){ // move all elements to the right of insertion location one space to the right
+            while(mover != index){ // move all elements to the right of insertion location one space to the right
                 ourArray[mover]= ourArray[mover-1];
                 mover--;
             }
-            ourArray[index-1] = element; // insert element into target location
+            ourArray[index] = element; // insert element into target location
         }
 
     }
 
+    /**
+     * override element at index, if avalible, or add to end if target is 1 ore than current size
+     * @param index index of the element to replace
+     * @param element element to be stored at the specified position
+     * @return
+     * @throws IndexOutOfBounds
+     */
     @Override
     public Object set(int index, Object element) throws IndexOutOfBounds {
         if(index > currentFilled ){ //ensure index is within used array bounds
@@ -67,9 +94,15 @@ public class GenericArrayList <T> implements IList{
 
 //Getters:
 
+    /**
+     *
+     * @param index index of the element to return
+     * @return
+     * @throws IndexOutOfBounds
+     */
     @Override
     public Object get(int index) throws IndexOutOfBounds {
-        if(index > currentFilled ){ //ensure index is within used array space
+        if(index-1 > currentFilled ){ //ensure index is within used array space
             try {
                 throw new IndexOutOfBounds();
             } catch (IndexOutOfBounds indexOutOfBounds) {
@@ -83,20 +116,31 @@ public class GenericArrayList <T> implements IList{
 
 //Removers:
 
+    /**
+     * find and remove target element within array, move elements to close gap
+     * @param elem the element to remove
+     * @return
+     * @throws IndexOutOfBounds
+     */
     @Override
     public boolean remove(Object elem) throws IndexOutOfBounds { //inefficient function, as if we use a index object from contains(element) we could remove with the remove(index) function very quickly
         if(!contains(elem)){ //ensure element is in arraylist
             return false;
         }//once here we know that the element is present, once located we we can remove it with the remove(index) function
         if (ourArray[0] == elem){ //check if element 0 is target, if so, then remove
-            remove(1);
+            remove(0);
+            return true;
+        }
+        else if(ourArray[currentFilled-1] == elem){
+            remove(currentFilled-1);
+            return true;
         }
         else { //else use iterator to find element location
             int targetLocation = 1; //where we can find the target element for the rovove function
             GenericArrayListIterator iteratoror = new GenericArrayListIterator();
             while (iteratoror.hasNext()) { //iterate through arraylist to find element
                 if(iteratoror.next() == elem){//evaluate
-                    remove(targetLocation+1); //have to be careful of the ol' 1 off error
+                    remove(targetLocation); //have to be careful of the ol' 1 off error
                     return true;
                 }
                 targetLocation++;
@@ -107,6 +151,12 @@ public class GenericArrayList <T> implements IList{
         return false;
     }
 
+    /**
+     * remove target element at index of array, move elements to close gap
+     * @param index
+     * @return
+     * @throws IndexOutOfBounds
+     */
     @Override
     public Object remove(int index) throws IndexOutOfBounds {
         if(index > currentFilled ){ //throw exception if index out of bounds.
@@ -130,6 +180,9 @@ public class GenericArrayList <T> implements IList{
 
 //Helpers:
 
+    /**
+     * double array size if current size is equal to size limit. normaly would have a safety gap, such as if array is half full then expand, but for the sake of this project we make it small to demonstrate its functionality
+     */
     private void resize(){
         if(currentFilled >= arrayCurrentMaxSize){ //check if we have reached the limit of array - at the moment we only worry if we are at the limit, in reality it may be better to have a tolerance such as 2/3 capacity to ensure that there is memory available for the move, but as the scope is small at the moment we can get away with it
             int resizeCopyIndex = 1; //helper to copy array
@@ -148,24 +201,35 @@ public class GenericArrayList <T> implements IList{
     }
 
     public void printList(){ //used to test during development, I'm leaving it here in case there are issues or if wanted for future function
-        System.out.println(ourArray[0]);
+        System.out.println("ArrayList: " + ourArray[0]);
         GenericArrayListIterator iteratoror = new GenericArrayListIterator();
         while (iteratoror.hasNext()) {
-            System.out.println(iteratoror.next());
+            System.out.println("ArrayList: " + iteratoror.next());
         }
 
     }
 
+    /**
+     * returns current used size within arraylist
+     * @return
+     */
     @Override
     public int size() { //returns current size of used portion of array
         return this.currentFilled;
     }
 
+    /**
+     * if size is zero we assume list is empty
+     * @return
+     */
     @Override
     public boolean isEmpty() { //returns boolean true if used array space is null
         return (size() == 0);
     }
 
+    /**
+    Search array and return true if element is found
+     */
     @Override
     public boolean contains(Object element) { //returns true if array contains element
         if(ourArray[0] == element){ //check if 0 is true,
@@ -180,6 +244,15 @@ public class GenericArrayList <T> implements IList{
         return false;
     }
 
+    /**
+     * Rotates elements of the list right or left depending on input
+     *      * @param distance
+     *      *      distance > 0 moves arraylist left
+     *      *     distance < 0 moves arraylist right
+     *      *     distance = 0 or *size() does nothing.
+     * @param distance
+     * @throws Throwable
+     */
     @Override
     public void rotate(int distance) throws Throwable {
         if (isEmpty()) {
@@ -257,9 +330,6 @@ public class GenericArrayList <T> implements IList{
         }
     }
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///ToDo - check that == works when evaluating Persons class, if needed change to equals(), however this is not required
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 

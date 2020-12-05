@@ -12,7 +12,7 @@ public class GenericLinkList <T> implements IList{
     public void printList(){
         Node current = headNode;
         while (current != null){
-            System.out.println(current.data);
+            System.out.println("LinkedList: " + current.data);
             current = current.nextNode;
         }
     }
@@ -29,7 +29,10 @@ public class GenericLinkList <T> implements IList{
     }
 
 
-//Helper function to enable adding to the very start of List for the first element.
+    /**
+     * //Helper function to enable adding to the very start of List for the first element.
+     * @param elem is inserted as headNode
+     */
     private void addToStart(Object elem) {
         Node newNode = new Node(elem);
         newNode.nextNode = headNode;
@@ -37,6 +40,10 @@ public class GenericLinkList <T> implements IList{
 
     }
 
+    /**
+     * add element to back of list
+     * @param elem to be added to the end of the list
+     */
  @Override
     public void add(Object elem) {
      if (headNode == null) {       //If the head node is missing or not built yet, then this wll create a new "First" node
@@ -54,6 +61,10 @@ public class GenericLinkList <T> implements IList{
      }
  }
 
+    /**
+     * returns if the list is empty or headless
+     * @return true if there is no data in head
+     */
     @Override
     public boolean isEmpty() {
         if(this.size() == 0){ //if size = zero, then it is empty by deff. or if head is missing.... but that's a bigger problem
@@ -61,6 +72,10 @@ public class GenericLinkList <T> implements IList{
         } else return false;
     }
 
+    /**
+     * size of LinkedList, uses the Iterator to walk the list
+     * @return
+     */
     @Override
     public int size() {
         if (headNode == null){
@@ -76,12 +91,23 @@ public class GenericLinkList <T> implements IList{
         return sizeOfList;
     }
 
-
+    /**
+     * Itterator as defined by interface
+     * @return
+     */
     @Override
     public Iterator<Node> iterator() {
         return new GenericLinkListIterator();
     }
 
+    /**
+     * Rotates elemnt of the list right or left depending on input
+     * @param distance
+     *      distance > 0 moves arraylist left
+     *     distance < 0 moves arraylist right
+     *     distance = 0 or *size() does nothing.
+     * @throws Throwable
+     */
     @Override
     public void rotate(int distance) throws Throwable {
         if (isEmpty()) {
@@ -147,19 +173,35 @@ public class GenericLinkList <T> implements IList{
 
     }
 
+    /**
+     *
+     * @param index index of the element to return
+     * @return
+     * @throws IndexOutOfBounds
+     */
     @Override
     public Object get(int index) throws IndexOutOfBounds {
         if(index > size()){
             throw new IndexOutOfBounds();
         }
+        if(index == 0){
+            return headNode.data;
+        }
         GenericLinkListIterator iteratoror = new GenericLinkListIterator();
-        for(int i = 1; i < index; i++){
+        for(int i = 0; i < index; i++){
             iteratoror.next();
         }
         return iteratoror.cursor.data;
 
     }
 
+    /**
+     *
+     * @param index index of the element to replace
+     * @param element element to be stored at the specified position
+     * @return
+     * @throws IndexOutOfBounds
+     */
     @Override
     public Object set(int index, Object element) throws IndexOutOfBounds {
         if(index > size()){
@@ -175,11 +217,19 @@ public class GenericLinkList <T> implements IList{
         return holdElement.data;
     }
 
+    /**
+     *
+     * @param element the element to search for
+     * @returnelement to search found
+     */
     @Override
     public boolean contains(Object element) {
         int index = size();
         GenericLinkListIterator iteratoror = new GenericLinkListIterator();
-        for(int i = 0; i < index; i++){
+        if(headNode.data == element){
+            return true;
+        }
+        for(int i = 1; i < index; i++){
             if(iteratoror.cursor.data == element){
                 return true;
             }
@@ -188,46 +238,57 @@ public class GenericLinkList <T> implements IList{
         return false;
     }
 
+    /**
+     *
+     * @param elem the element to remove
+     * @return
+     */
     @Override
     public boolean remove(Object elem) {
-        if(!contains(elem)) {
+        if(!contains(elem)) { //check if element exists
             return false;
         }
-        else if(headNode.data == elem){
+        if(headNode.data == elem){ // check head
             headNode = headNode.nextNode;
             return true;
         }
-        else {
+        else { //iterate through and find element
             Node current = headNode;
-            for(int i = 0; i< size(); i++){
+            for(int i = 1; i< size(); i++){
                 if(current.nextNode.data == elem){
                     current.nextNode = current.nextNode.nextNode;
                     return true;
                 }
-                current = current.nextNode;
+                current = current.nextNode; //remove by skipping the node that contains the target element
             }
             return false;
         }
 
     }
 
+    /**
+     * insert element into list  and shift other elements after
+     * @param index index at which the specified element is to be inserted
+     * @param element element to be inserted
+     * @throws IndexOutOfBounds
+     */
     @Override
     public void add(int index, Object element) throws IndexOutOfBounds {
         Node newNode = new Node(element);
         if(index > size()+1){
             throw new IndexOutOfBounds();
         }
-        if(index == 1){
+        if(index == 0){
             newNode.nextNode = headNode;
             headNode = newNode;
         }
 
-        else if((index -1) == size()){
+        else if((index) == size()){
             add(element);
         }
         else {
             Node current = headNode;
-            for(int i = 1; i < index-1; i++){
+            for(int i = 1; i < index; i++){
                 current = current.nextNode;
             }
             if(current.nextNode != null) {
@@ -237,6 +298,11 @@ public class GenericLinkList <T> implements IList{
         }
     }
 
+    /**
+     * @param index
+     * @return if data from the node if it has been removed
+     * @throws IndexOutOfBounds
+     */
     @Override
     public Object remove(int index) throws IndexOutOfBounds {
         Node toRemove = new Node(get(index));
@@ -248,20 +314,13 @@ public class GenericLinkList <T> implements IList{
             headNode = headNode.nextNode;
             return toRemove;
         }
-        for(int i = 0; i < index; i++){
+        for(int i = 0; i < index-1; i++){
             current = current.nextNode;
         }
         current.nextNode = current.nextNode.nextNode;
         return toRemove;
 
     }
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///ToDo
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
 
 
 
