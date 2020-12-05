@@ -20,9 +20,9 @@ public class GenericCollectionsTest {
         GenericCollections.sort(myList);
         GenericCollections.printList("\nSorted List based on natural ordering (age):", myList);
         GenericCollections.rotate(myList, 2);
-        GenericCollections.printList("\nList rotated left by two (as per Dermot's spec):", myList);
+        GenericCollections.printList("\nList rotated left by two(2) (as per Dermot's spec):", myList);
         GenericCollections.rotate2(myList, -2);
-        GenericCollections.printList("\nList rotated right IList rotate to correct:", myList);
+        GenericCollections.printList("\nList rotated right using IList rotate (-2) to correct:", myList);
         System.out.println("\nThe oldest person is " + GenericCollections.max(myList));
     }
 }

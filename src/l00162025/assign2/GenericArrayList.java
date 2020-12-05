@@ -147,7 +147,7 @@ public class GenericArrayList <T> implements IList{
         }
     }
 
-    public void printArray(){ //used to test during development, I'm leaving it here in case there are issues or if wanted for future function
+    public void printList(){ //used to test during development, I'm leaving it here in case there are issues or if wanted for future function
         System.out.println(ourArray[0]);
         GenericArrayListIterator iteratoror = new GenericArrayListIterator();
         while (iteratoror.hasNext()) {

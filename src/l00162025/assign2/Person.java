@@ -1,5 +1,8 @@
 package l00162025.assign2;
 
+/**
+ * Provided sample class for use in testing- provided by Dermot Hegarty
+ */
 public class Person implements Comparable<Person> {
     private String firstname;
     private String surname;
