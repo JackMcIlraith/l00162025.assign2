@@ -43,6 +43,12 @@ public class InfixCalculator {
                         case "/":
                             result = leftPart / rightPart;
                             break;
+                        case "^":
+                            result = Math.pow(leftPart, rightPart);
+                            break;
+                        case "%":
+                            result = leftPart % rightPart;
+                            break;
                         default:
                             break;
                     }
@@ -53,6 +59,8 @@ public class InfixCalculator {
                 case "*":
                 case "-":
                 case "/":
+                case "%":
+                case "^":
                     operators.push(cleanExpression[i]);
                     break;
                 case "(":
@@ -83,9 +91,11 @@ public class InfixCalculator {
         exprssion = exprssion.replaceAll("\\+", " + ");
         exprssion = exprssion.replaceAll("\\-", " - ");
         exprssion = exprssion.replaceAll("\\*", " * ");
+        exprssion = exprssion.replaceAll("\\%", " % ");
         exprssion = exprssion.replaceAll("\\/", " / ");
         exprssion = exprssion.replaceAll("\\)", " ) ");
         exprssion = exprssion.replaceAll("\\(", " ( ");
+        exprssion = exprssion.replaceAll("\\^", " ^ ");
         exprssion = exprssion.replaceAll("  ", " ");
         exprssion = exprssion.replaceAll("   ", " ");
         return exprssion;
