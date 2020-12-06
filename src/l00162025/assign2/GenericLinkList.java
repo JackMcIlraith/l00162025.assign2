@@ -189,7 +189,7 @@ public class GenericLinkList <T> implements IList{
         }
         GenericLinkListIterator iteratoror = new GenericLinkListIterator();
         for(int i = 0; i < index; i++){
-            iteratoror.next();
+            iteratoror. next();
         }
         return iteratoror.cursor.data;
 

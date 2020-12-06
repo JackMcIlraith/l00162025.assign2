@@ -10,6 +10,7 @@ public class StacksAndQueueTest {
         GenericStack<String> GStack = new GenericStack<>();
         GenericQueue<String> GQueue = new GenericQueue<>();
 
+        System.out.println();
         System.out.println("Begin to enqueue Queue and load stack with 'First'");
         GQueue.enque("First");
         GStack.push("First");
@@ -27,6 +28,7 @@ public class StacksAndQueueTest {
         GQueue.enque("Third");
         GStack.push("Third");
         System.out.println("///////////////////////");
+        System.out.println();
 
         System.out.println("Unload Queue with dequeue, expect 123 (FIFO)");
         System.out.println("1 Queue: " + GQueue.dequeue());

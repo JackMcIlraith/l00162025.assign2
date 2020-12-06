@@ -82,7 +82,7 @@ public class GenericsIListClassesTest {
         testLinkedList.printList();
         System.out.println("//////////////////////////////////////////////////////////");
 
-        System.out.println("Test remove (index2) Bill" );
+        System.out.println("Test remove (index 2) Bill" );
         testArrayList.remove(2);
         testLinkedList.remove(2);
         testArrayList.printList();
@@ -91,7 +91,7 @@ public class GenericsIListClassesTest {
         System.out.println("//////////////////////////////////////////////////////////");
 
 
-        System.out.println("Test remove (person 6 ie Patrick)" );
+        System.out.println("Test remove (person6 ie Patrick)" );
         testArrayList.remove(person6);
         testLinkedList.remove(person6);
         testArrayList.printList();
@@ -99,7 +99,7 @@ public class GenericsIListClassesTest {
         testLinkedList.printList();
         System.out.println("//////////////////////////////////////////////////////////");
 
-        System.out.println("Test remove (person 3 ie Kate)" );
+        System.out.println("Test remove (person3 ie Kate)" );
         testArrayList.remove(person3);
         testLinkedList.remove(person3);
         testArrayList.printList();
@@ -107,7 +107,7 @@ public class GenericsIListClassesTest {
         testLinkedList.printList();
         System.out.println("//////////////////////////////////////////////////////////");
 
-        System.out.println("Test set() all 3 to person 5 (Bill)" );
+        System.out.println("Test set() all 3 to person5 ie Bill" );
         testArrayList.set(0,person5);
         testArrayList.set(1,person5);
         testArrayList.set(2,person5);

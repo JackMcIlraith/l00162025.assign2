@@ -274,11 +274,10 @@ public class GenericArrayList <T> implements IList{
             return;
         } else if (distance >= 0) { //rotate left
             for (int i = 0; i < distance; i++) {
-                add(0); //very inefficient in memory if the size has exactly matched the limit of the arraylist, but if not, then its about O(n) per iteration
+                add(get(0)); //very inefficient in memory if the size has exactly matched the limit of the arraylist, but if not, then its about O(n) per iteration
                 remove(0);
-                return;
             }
-
+            return;
         }
     }
 
